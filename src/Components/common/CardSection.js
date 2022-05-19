@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import { View } from 'react-native';
 
@@ -18,8 +17,8 @@ const styles = {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     borderColor: '#ddd',
-    position: 'relative'
-  }
+    position: 'relative',
+  },
 };
 
 export { CardSection };
