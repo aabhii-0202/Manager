@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React,{Component} from 'react';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, Confirm } from './common';
 import {connect} from 'react-redux';
 import {employeeUpdate,employeeSave} from '../actions';
 import EmployeeForm from './EmployeeForm';
@@ -9,6 +9,7 @@ import Communications from 'react-native-communications';
 
 class EmployeeEdit extends Component{
 
+    state = {show: false};
     componentDidMount(){
         _.each(this.props.employee,(value,prop)=>{
             this.props.employeeUpdate({prop,value});
@@ -37,12 +38,21 @@ class EmployeeEdit extends Component{
                     </Button>
                 </CardSection>
                 <CardSection>
-                    <Button 
+                    <Button
                         onPress={this.onPressText.bind(this)}
                     >
                         Text Schedule
                     </Button>
                 </CardSection>
+                <CardSection>
+                    <Button onPress={()=> this.setState({show: !this.state.show})}>
+                        Fire Employee</Button>
+                </CardSection>
+                <Confirm
+                    visible={this.state.show}
+                >
+                    Are You Sure You Want to Delete this?
+                </Confirm>
             </Card>
         );
     }
