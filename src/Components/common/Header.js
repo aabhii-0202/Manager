@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-// Import libraries for making a component
 import React from 'react';
 import { Text, View } from 'react-native';
 
