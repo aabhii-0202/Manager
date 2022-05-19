@@ -7,7 +7,7 @@ import EmployeeListItem from './EmployeeListItem';
 
 class EmployeeList extends Component{
     componentDidMount(){
-        // this.props.employeesFetch();
+        this.props.employeesFetch();
         this.createDataSourse(this.props);
     }
 
@@ -15,16 +15,8 @@ class EmployeeList extends Component{
         this.createDataSourse(nextProps);
     }
 
-    createDataSourse({ employees }){
-        // const ds = new ListView.DataSource({
-        //     rowHasChanged: (r1,r2) => r1 !== r2,
-        // });
+    createDataSourse({ employees }){ }
 
-        // this.dataSourse = ds.cloneWithRows(employees);
-        
-    }
-    
-    
     renderItem({ item, index }) {
     return <Text>{item}</Text>;
     }

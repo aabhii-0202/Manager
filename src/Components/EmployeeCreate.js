@@ -2,8 +2,7 @@ import React,{Component} from 'react';
 import { Card, CardSection, Button } from './common';
 import {connect} from 'react-redux';
 import {employeeUpdate, employeeCreate} from '../actions';
-import EmployeeForm from './EmployeeForm';
-import {Text} from 'react-native';
+import {EmployeeForm} from './EmployeeForm';
 
 
 class EmployeeCreate extends Component{

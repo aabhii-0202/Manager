@@ -32,19 +32,19 @@ export const employeeCreate = ({name,phone,shift}) => {
     const {currentUser} = auth();
     return (dispatch) =>{
 
-        // const ref = database(
-        //   'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/'
-        //   ).ref(`/users/${currentUser.uid}/employees`);
-        // console.log(ref);
-        // ref.set({name,phone,shift})
-        // .then(()=> {
-        //     console.log('Data set.');
-        //     dispatch({type: EMPLOYEE_CREATE });
-        //     Actions.employeeList({type: 'reset'});
-        // });
+        const ref = database(
+          'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/'
+          ).ref(`/users/${currentUser.uid}/employees`);
+        console.log(ref);
+        ref.set({name,phone,shift})
+        .then(()=> {
+            console.log('Data set.');
+            dispatch({type: EMPLOYEE_CREATE });
+            Actions.employeeList({type: 'reset'});
+        });
 
-        dispatch({type: EMPLOYEE_CREATE });
-        Actions.EmployeeList({type: 'reset'});
+        // dispatch({type: EMPLOYEE_CREATE });
+        // Actions.EmployeeList({type: 'reset'});
     };
 
 };
@@ -52,30 +52,42 @@ export const employeeCreate = ({name,phone,shift}) => {
 
 export const employeesFetch = () => {
   const {currentUser} = auth();
-  return (diapactch) => {
+  return (dispatch) => {
     const ref = database(
           'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/'
           ).ref(`/users/${currentUser.uid}/employees`);
         ref.on('value', snapshot =>{
-          diapactch({type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val()});
+          dispatch({type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val()});
         });
   };
 };
 
 export const employeeSave = ({name,phone,shift,uid})=>{
   const {currentUser} = auth();
-  return (diapactch) => {
+  return (dispatch) => {
     const ref = database(
           'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/'
           ).ref(`/users/${currentUser.uid}/employees/${uid}`);
           ref.set({name,phone,shift})
-          .then((dispatch)=> {
+          .then(()=> {
             dispatch({type: EMPLOYEE_SAVE_SUCCESS});
             Actions.EmployeeList({type: 'reset'});
           });
   };
 };
 
+export const employeeDelete = ({uid}) => {
+  const {currentUser} = auth();
+  return () => {
+    const ref = database(
+          'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/'
+          ).ref(`/users/${currentUser.uid}/employees/${uid}`);
+          ref.remove()
+          .then(()=>{
+            Actions.EmployeeList({type: 'reset'});
+          });
+  };
+};
 
 
 

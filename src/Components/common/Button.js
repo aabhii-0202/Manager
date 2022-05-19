@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import React from 'react';
+import {React} from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 const Button = ({ onPress, children }) => {
@@ -31,8 +30,8 @@ const styles = {
     borderWidth: 1,
     borderColor: '#007aff',
     marginLeft: 5,
-    marginRight: 5
-  }
+    marginRight: 5,
+  },
 };
 
 export { Button };
