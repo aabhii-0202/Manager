@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 class EmployeeListItem extends Component{
 
     onRowPress(){
-        Actions.EmployeeCreate({ employee : this.props.employee });
+        Actions.EmployeeEdit({ employee : this.props.employee });
     }
 
 
@@ -14,7 +14,7 @@ class EmployeeListItem extends Component{
     render(){
         const { name } = this.props.employee;
         return (
-            <TouchableWithoutFedback 
+            <TouchableWithoutFedback
                 onPress={this.onRowPress.bind(this)}
             >
             <CardSection>

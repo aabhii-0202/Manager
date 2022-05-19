@@ -2,6 +2,7 @@ import {
     EMPLOYEE_UPDATE,
     EMPLOYEE_CREATE,
     EMPLOYEES_FETCH_SUCCESS,
+    EMPLOYEE_SAVE_SUCCESS,
 } from './types';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
@@ -29,8 +30,6 @@ export const employeeCreate = ({name,phone,shift}) => {
   firebase.initializeApp(firebaseConfig);
 
     const {currentUser} = auth();
-
-    // const URL = 'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/';
     return (dispatch) =>{
 
         // const ref = database(
@@ -60,6 +59,20 @@ export const employeesFetch = () => {
         ref.on('value', snapshot =>{
           diapactch({type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val()});
         });
+  };
+};
+
+export const employeeSave = ({name,phone,shift,uid})=>{
+  const {currentUser} = auth();
+  return (diapactch) => {
+    const ref = database(
+          'https://managerproject-8924c-default-rtdb.asia-southeast1.firebasedatabase.app/'
+          ).ref(`/users/${currentUser.uid}/employees/${uid}`);
+          ref.set({name,phone,shift})
+          .then((dispatch)=> {
+            dispatch({type: EMPLOYEE_SAVE_SUCCESS});
+            Actions.EmployeeList({type: 'reset'});
+          });
   };
 };
 
